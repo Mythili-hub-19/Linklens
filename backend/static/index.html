@@ -1,0 +1,91 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>LinkLens | Smart Threat Detection</title> 
+    <link rel="stylesheet" href="style.css"> 
+</head> 
+<body> 
+  
+    <header class="navbar"> 
+        <div class="logo">Link<span>Lens</span></div> 
+        <p>Smart Link &amp; Message Protection</p> 
+    </header> 
+  
+    <main class="container"> 
+  
+        <section class="hero"> 
+            <div class="tag">CYBERSECURITY • SMART PROTECTION</div> 
+            <h1>Stay Safe.<br><span>Detect Threats.</span></h1> 
+            <p>Check suspicious URLs and messages before you click.</p> 
+        </section> 
+  
+        <section class="scanner"> 
+  
+            <label for="userInput">Paste your suspicious URL or message</label> 
+  
+            <textarea 
+                id="userInput" 
+                placeholder="Example: Your account is blocked! Verify now..." 
+            ></textarea> 
+  
+            <div class="sample-section"> 
+                <span>Try a sample:</span> 
+                <button class="sample-btn" data-sample="https://www.google.com">Safe URL</button> 
+                <button class="sample-btn" data-sample="http://paypal.secure-login.xyz/verify">Suspicious URL</button> 
+                <button class="sample-btn" data-sample="URGENT! Your account is blocked. Verify your account at 
+http://bit.ly/x1 within 24 hours">Phishing Message</button> 
+            </div> 
+  
+            <div class="actions"> 
+                <button id="analyzeBtn" class="analyze-btn">Analyze Threat →</button> 
+                <button id="resetBtn" class="reset-btn">Reset</button> 
+            </div> 
+  
+            <p class="demo-note"> 
+                Demo mode: Results are generated using sample keyword rules. 
+            </p> 
+  
+        </section> 
+  
+        <section id="result" class="result hidden"> 
+  
+            <div class="result-heading"> 
+                <h2>Analysis Result</h2> 
+                <span id="statusBadge" class="status-badge">Safe</span> 
+            </div>
+<p id="riskLevel" class="risk-level"></p> 
+            <p id="riskScore" class="risk-score"></p> 
+  
+            <div class="meter"> 
+                <div id="meterFill"></div> 
+            </div> 
+  
+            <div class="result-block"> 
+                <h3>⚠ Warnings Detected</h3> 
+                <ul id="warnings"></ul> 
+            </div> 
+  
+            <div class="result-block"> 
+                <h3>🛡 Prevention Suggestions</h3> 
+                <ul id="preventionTips"></ul> 
+            </div> 
+  
+            <p class="disclaimer"> 
+                This is a demonstration, not a real-time security verification. 
+                Even a low score does not guarantee that a link is safe. 
+            </p> 
+  
+        </section> 
+  
+    </main> 
+  
+    <footer> 
+        <p>LinkLens © 2026 | Stay Alert. Stay Protected.</p> 
+    </footer> 
+  
+    <script src="script.js"></script> 
+</body> 
+</html> 
+ 

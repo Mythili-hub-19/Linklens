@@ -1,0 +1,310 @@
+{ 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+} 
+  
+body { 
+    font-family: Arial, sans-serif; 
+    background: #081321; 
+    color: #ffffff; 
+    min-height: 100vh; 
+} 
+  
+.navbar { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 22px 8%; 
+    border-bottom: 1px solid #20364d; 
+} 
+  
+.logo { 
+    font-size: 27px; 
+    font-weight: bold; 
+    color: #ffffff; 
+} 
+  
+.logo span { 
+    color: #27c5e8; 
+} 
+  
+.navbar p { 
+    color: #9db2c8; 
+    font-size: 14px; 
+} 
+  
+.container { 
+    width: 90%; 
+    max-width: 850px; 
+    margin: 55px auto; 
+} 
+.hero { 
+    text-align: center; 
+    margin-bottom: 35px; 
+} 
+  
+.tag { 
+    color: #27c5e8; 
+    font-size: 12px; 
+    letter-spacing: 2px; 
+    margin-bottom: 18px; 
+} 
+  
+.hero h1 { 
+    font-size: 48px; 
+    line-height: 1.2; 
+    margin-bottom: 15px; 
+} 
+  
+.hero h1 span { 
+    color: #27c5e8; 
+} 
+  
+.hero p { 
+    color: #9db2c8; 
+    font-size: 16px; 
+} 
+  
+.scanner, 
+
+LinkLens Frontend Code  |  Page 3 
+
+
+
+.result { 
+    background: #12243a; 
+    padding: 30px; 
+    border: 1px solid #29435d; 
+    border-radius: 16px; 
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2); 
+} 
+  
+.scanner label { 
+    display: block; 
+    font-weight: bold; 
+    margin-bottom: 14px; 
+} 
+  
+textarea { 
+    width: 100%; 
+    height: 135px; 
+    resize: vertical; 
+    padding: 17px; 
+    background: #091727; 
+    border: 1px solid #34516c; 
+    border-radius: 10px; 
+    color: white; 
+    font-size: 15px; 
+    outline: none; 
+} 
+  
+textarea:focus { 
+    border-color: #27c5e8; 
+} 
+  
+textarea::placeholder { 
+    color: #71869b; 
+} 
+  
+.sample-section { 
+    margin: 18px 0; 
+    display: flex; 
+    flex-wrap: wrap; 
+    align-items: center; 
+    gap: 9px; 
+} 
+  
+.sample-section span { 
+    color: #9db2c8; 
+    font-size: 13px; 
+} 
+  
+.sample-btn { 
+    background: #1b354e; 
+    color: #bcefff; 
+    border: 1px solid #34516c; 
+    padding: 8px 11px; 
+    border-radius: 20px; 
+    cursor: pointer; 
+    font-size: 12px; 
+} 
+  
+.sample-btn:hover { 
+    background: #28516e; 
+} 
+  
+.actions { 
+    display: flex; 
+    gap: 12px; 
+    margin-top: 20px; 
+} 
+  
+.analyze-btn, 
+.reset-btn { 
+    padding: 14px 22px; 
+    border: none; 
+    border-radius: 9px; 
+    cursor: pointer; 
+    font-size: 15px; 
+    font-weight: bold; 
+
+LinkLens Frontend Code  |  Page 4 
+
+
+
+} 
+  
+.analyze-btn { 
+    flex: 1; 
+    background: #20b9dc; 
+    color: #071522; 
+} 
+  
+.analyze-btn:hover { 
+    background: #50d5f0; 
+} 
+  
+.reset-btn { 
+    background: #29435d; 
+    color: white; 
+} 
+  
+.reset-btn:hover { 
+    background: #3a5875; 
+} 
+  
+button:disabled { 
+    opacity: 0.6; 
+    cursor: not-allowed; 
+} 
+  
+.demo-note { 
+    text-align: center; 
+    color: #8298ad; 
+    font-size: 12px; 
+    margin-top: 18px; 
+} 
+  
+.result { 
+    margin-top: 25px; 
+} 
+  
+.hidden { 
+    display: none; 
+} 
+  
+.result-heading { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 10px; 
+} 
+  
+.result-heading h2 { 
+    font-size: 23px; 
+} 
+  
+.status-badge { 
+    padding: 7px 14px; 
+    border-radius: 20px; 
+    font-size: 12px; 
+    font-weight: bold; 
+    background: #1d5947; 
+    color: #70edb8; 
+} 
+  
+.risk-level { 
+    font-size: 20px; 
+    font-weight: bold; 
+    margin-top: 22px; 
+} 
+  
+.risk-score { 
+    color: #a9bed1; 
+    margin-top: 8px; 
+} 
+  
+.meter { 
+    width: 100%; 
+    height: 13px; 
+
+LinkLens Frontend Code  |  Page 5 
+
+
+
+    background: #263c52; 
+    border-radius: 20px; 
+    overflow: hidden; 
+    margin: 18px 0 28px; 
+} 
+  
+#meterFill { 
+    width: 0%; 
+    height: 100%; 
+    background: #50d69a; 
+    border-radius: 20px; 
+    transition: width 0.7s ease, background 0.3s ease; 
+} 
+  
+.result-block { 
+    margin-top: 25px; 
+} 
+  
+.result-block h3 { 
+    color: #27c5e8; 
+    margin-bottom: 12px; 
+    font-size: 17px; 
+} 
+  
+.result-block ul { 
+    padding-left: 22px; 
+    color: #c4d4e3; 
+    line-height: 1.9; 
+} 
+  
+.disclaimer { 
+    color: #8da5bd; 
+    font-size: 12px; 
+    line-height: 1.6; 
+    margin-top: 25px; 
+    border-top: 1px solid #29435d; 
+    padding-top: 15px; 
+} 
+  
+footer { 
+    text-align: center; 
+    padding: 25px; 
+    color: #71869b; 
+    font-size: 13px; 
+} 
+  
+@media (max-width: 600px) { 
+    .navbar { 
+        padding: 18px 5%; 
+        flex-direction: column; 
+        gap: 8px; 
+    } 
+  
+    .container { 
+        margin: 35px auto; 
+    } 
+  
+    .hero h1 { 
+        font-size: 36px; 
+    } 
+  
+    .scanner, 
+    .result { 
+        padding: 20px; 
+    } 
+  
+    .actions { 
+        flex-direction: column; 
+    } 
+  
+    .result-heading h2 { 
+        font-size: 19px; 
+    } 
+} 
+ 

@@ -1,4 +1,3 @@
-
 const userInput = document.getElementById("userInput");
 const analyzeBtn = document.getElementById("analyzeBtn");
 const resetBtn = document.getElementById("resetBtn");
@@ -13,7 +12,9 @@ const preventionList = document.getElementById("preventionTips");
 const meterFill = document.getElementById("meterFill");
 const statusBadge = document.getElementById("statusBadge");
 
+
 // Sample input buttons
+
 document.querySelectorAll(".sample-btn").forEach(function(button) {
     button.addEventListener("click", function() {
         userInput.value = button.dataset.sample;
@@ -21,8 +22,10 @@ document.querySelectorAll(".sample-btn").forEach(function(button) {
     });
 });
 
-// Analyze button - REAL BACKEND CONNECTION
-analyzeBtn.addEventListener("click", async function() {
+
+// Analyze button
+
+analyzeBtn.addEventListener("click", function() {
 
     const text = userInput.value.trim();
 
@@ -36,63 +39,51 @@ analyzeBtn.addEventListener("click", async function() {
 
     result.classList.add("hidden");
 
-    try {
-
-        const response = await fetch(
-            `/analyze?text=${encodeURIComponent(text)}`
-        );
-
-        const analysis = await response.json();
-
-        if (!response.ok) {
-            throw new Error(analysis.detail || "Analysis failed");
-        }
-
-        showResult(analysis);
-
-    } catch (error) {
-
-        alert("Unable to analyze: " + error.message);
-        console.error("Analysis error:", error);
-
-    } finally {
-
-        analyzeBtn.textContent = "Analyze Threat →";
-        analyzeBtn.disabled = false;
-
-    }
+    // ---------- JAVASCRIPT <-> BACKEND: THE fetch() CALL ----------
+    fetch("/analyze?text=" + encodeURIComponent(text))
+        .then(function(response) {
+            return response.json().then(function(data) {
+                if (!response.ok) {
+                    // main.py sends errors as {"detail": "..."}
+                    throw new Error(data.detail || "Analysis failed.");
+                }
+                return data;
+            });
+        })
+        .then(function(data) {
+            showResult(data);                      // data comes from detection.py
+        })
+        .catch(function(error) {
+            if (error instanceof TypeError) {
+                alert("Cannot reach the server. Is FastAPI running?");
+            } else {
+                alert(error.message);
+            }
+        })
+        .finally(function() {
+            analyzeBtn.textContent = "Analyze Threat →";
+            analyzeBtn.disabled = false;
+        });
 });
 
 
 // Display result
+
 function showResult(analysis) {
 
-    // Accept backend field names
+    riskLevel.textContent = "Risk Level: " + analysis.risk_level;
+    riskScore.textContent = "Risk Score: " + analysis.risk_score + "/100";
 
-//we replaced analysis.score with score and vice versa warnings , tips & 
-//level to make js compatible with response format of python detection engine
-//thus frontend matches backend response format
-    const score = analysis.risk_score ?? analysis.score ?? analysis.threat_score;
+    meterFill.style.width = analysis.risk_score + "%";
 
-    const level = analysis.risk_level ?? analysis.level;
-
-    const warnings = analysis.warnings ?? analysis.reasons ?? [];
-
-    const tips = analysis.prevention_tips ?? analysis.tips ?? [];
-
-    riskLevel.textContent = "Risk Level: " + level;
-    riskScore.textContent = "Risk Score: " + score + "/100";
-
-    meterFill.style.width = score + "%";
-
-    if (level === "Dangerous") {
+    if (analysis.risk_level === "Dangerous") {
 
         riskLevel.style.color = "#ff6464";
         meterFill.style.background = "#ff6464";
         statusBadge.style.background = "#542b35";
         statusBadge.style.color = "#ff9999";
 
-    } else if (level === "Suspicious") {
+    } else if (analysis.risk_level === "Suspicious") {
 
         riskLevel.style.color = "#ffc45c";
         meterFill.style.background = "#ffc45c";
@@ -105,31 +96,30 @@ function showResult(analysis) {
         meterFill.style.background = "#50d69a";
         statusBadge.style.background = "#1d5947";
         statusBadge.style.color = "#70edb8";
-
     }
 
-    statusBadge.textContent = level;
+    statusBadge.textContent = analysis.risk_level;
+
 
     // Display warnings
+
     warningsList.replaceChildren();
 
-    warnings.forEach(function(warning) {
-
+    analysis.warnings.forEach(function(warning) {
         const li = document.createElement("li");
         li.textContent = warning;
         warningsList.appendChild(li);
-
     });
 
+
     // Display prevention suggestions
+
     preventionList.replaceChildren();
 
-    tips.forEach(function(tip) {
-
+    analysis.prevention_tips.forEach(function(tip) {
         const li = document.createElement("li");
         li.textContent = tip;
         preventionList.appendChild(li);
-
     });
 
     result.classList.remove("hidden");
@@ -137,6 +127,7 @@ function showResult(analysis) {
 
 
 // Reset button
+
 resetBtn.addEventListener("click", function() {
 
     userInput.value = "";
@@ -152,5 +143,4 @@ resetBtn.addEventListener("click", function() {
     analyzeBtn.disabled = false;
 
     userInput.focus();
-
 });

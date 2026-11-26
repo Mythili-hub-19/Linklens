@@ -1,173 +1,191 @@
-# LinkLens
+# 🔗 LinkLens — Smart Link & Message Protection
 
-![License: MIT](https://img.shields.io/badge/License-MIT-green.svg) ![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue.svg) ![FastAPI](https://img.shields.io/badge/FastAPI-009688.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue.svg)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688.svg)
+![Status](https://img.shields.io/badge/Status-Live-brightgreen.svg)
 
-**Smart link and message protection.** *Built as a hackathon project.* LinkLens is a small web app that checks a suspicious URL or message and tells you how risky it looks *before* you click. Paste something in, and it returns a risk score out of 100, a risk level, and a list of the warning signs it found.
+**Protect yourself from suspicious links and phishing messages with LinkLens!**
 
-> **Note:** LinkLens is a demo built on simple rule-based checks. It does not look up live threat databases, so a low score does not guarantee that a link or message is safe.
+LinkLens is a web-based security awareness tool that analyzes URLs and messages to identify potential warning signs of phishing and online scams. It provides a risk score, risk level, and actionable safety recommendations.
 
-## Features
+## 🚀 Try LinkLens Live
 
-- Analyzes a **URL**, a **message**, or a message that **contains links**
-- Gives a **risk score (0–100)** and a level: **Safe**, **Suspicious**, or **Dangerous**
-- Explains the result with a list of **warnings**, each showing the points it added
-- **Prevention tips** tailored to the risk level, so users know what to do next
-- One-click **sample inputs** (safe URL, suspicious URL, phishing message) to try it out
-- Clean, dark-themed single-page interface with a colour-coded risk meter
-- FastAPI backend that serves both the API and the frontend, so there is only one server to run
+### 👉 [OPEN LINKLENS — LIVE DEMO](https://linklens-36fb.onrender.com)
 
-## Tech stack
+**No installation required!** Open the live website, enter a suspicious URL or message, and click **Analyze Threat** to see the results.
 
-| Layer     | Technology                                  |
-| --------- | ------------------------------------------- |
-| Backend   | Python, [FastAPI](https://fastapi.tiangolo.com/), Uvicorn |
-| Detection | Python (`re`, `urllib.parse`), no extra dependencies |
-| Frontend  | HTML, CSS, vanilla JavaScript               |
+> Note: The application is hosted on Render's free tier. If the service has been inactive, its first request may take some time to load.
 
-## Project structure
+---
 
+## ✨ Features
+
+- 🔗 **URL Analysis:** Checks URLs for common suspicious characteristics.
+- 💬 **Message Analysis:** Identifies potentially risky wording in messages.
+- 📊 **Risk Score:** Assigns a score from 0 to 100.
+- 🚦 **Risk Classification:** Categorizes results as Safe, Suspicious, or Dangerous.
+- ⚠️ **Warning Details:** Explains the warning signs detected and their score contributions.
+- 🛡️ **Prevention Tips:** Provides recommendations based on the analysis.
+- 🔍 **Link Extraction:** Analyzes links included in submitted messages.
+- 🖥️ **Interactive Interface:** Uses a dark-themed interface with a color-coded risk meter.
+- ⚡ **REST API:** Provides an API endpoint for submitting text for analysis.
+
+## 🎯 How to Use
+
+1. Open the [LinkLens Live Website](https://linklens-36fb.onrender.com).
+2. Enter a URL, a suspicious message, or a message containing a link.
+3. Click **Analyze Threat**.
+4. Review the risk score, risk level, and detected warning signs.
+5. Follow the prevention tips to help protect yourself online.
+
+**That's it!** You don't need to install Python or run terminal commands to try the live demo.
+
+## 🧪 Example
+
+Try analyzing this simulated suspicious URL:
+
+`http://paypal.secure-login.xyz/verify`
+
+LinkLens may flag warning signs such as:
+- Use of HTTP instead of HTTPS.
+- A potentially risky domain ending.
+- Suspicious words such as `secure`, `login`, or `verify`.
+- A brand name appearing in a domain that does not belong to that brand.
+
+*This URL is an illustrative example, not a recommendation to visit the website.*
+
+The actual risk score and warnings depend on the detection rules implemented in the application.
+
+## 🛠️ Technology Stack
+
+| Component | Technology |
+|---|---|
+| Backend | Python |
+| Web Framework | FastAPI |
+| Server | Uvicorn |
+| Detection Engine | Python, Regular Expressions, URL Parsing |
+| Frontend | HTML, CSS, JavaScript |
+| Deployment | Render |
+
+## ⚙️ How It Works
+
+LinkLens uses a rule-based detection engine to examine URLs and messages for common warning signs.
+
+### URL Checks
+- IP addresses used instead of domain names.
+- Suspicious URL structures, including the `@` symbol.
+- HTTP links without HTTPS.
+- Unusually long URLs.
+- Multiple hyphens in domain names.
+- Potentially risky domain endings.
+- URL shortening services.
+- Suspicious keywords in links.
+- Brand names appearing in unrelated domains.
+
+### Message Checks
+- Urgent or threatening language.
+- Requests for sensitive information.
+- Suspicious account verification requests.
+- Messages that pressure users to act quickly.
+
+The application combines detected warning signs into a risk score capped at 100.
+
+| Risk Score | Risk Level |
+|---|---|
+| 0–19 | Safe |
+| 20–49 | Suspicious |
+| 50–100 | Dangerous |
+
+**Important:** These classifications are heuristic estimates, not guarantees of safety or maliciousness.
+
+## 🌐 Live Application & API
+
+**Live Website:**  
+https://linklens-36fb.onrender.com
+
+**API Documentation:**  
+https://linklens-36fb.onrender.com/docs
+
+The API documentation provides an interactive interface for exploring the available API endpoints.
+
+### Analyze Endpoint
+
+`GET /analyze`
+
+| Parameter | Description |
+|---|---|
+| `text` | The URL, message, or text to analyze |
+
+Example endpoint:
+
+`https://linklens-36fb.onrender.com/analyze?text=example`
+
+The endpoint returns a JSON response containing the risk score, risk level, warning messages, and prevention tips.
+
+## 💻 Run Locally (Optional)
+
+Judges can use the live demo without running any commands. Developers who want to explore the source code can run the project locally.
+
+### Prerequisites
+- Python 3.8 or newer
+- pip
+
+### Installation
+
+```bash
+git clone https://github.com/Yukta-devlane-18/Linklens.git
+cd Linklens
+pip install -r requirements.txt
+cd backend
+uvicorn main:app --reload
 ```
+
+Open `http://127.0.0.1:8000` in your browser.
+
+## 📁 Project Structure
+
+```text
 Linklens/
 ├── LICENSE
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
 └── backend/
-    ├── main.py          # FastAPI app: /analyze endpoint + serves the frontend
-    ├── detection.py     # Rule-based detection engine (scoring logic)
+    ├── main.py
+    ├── detection.py
     └── static/
-        ├── index.html   # Page layout
-        ├── style.css    # Styling
-        └── script.js    # Calls the API and renders the result
+        ├── index.html
+        ├── style.css
+        └── script.js
 ```
 
-## Getting started
+## 🔮 Future Improvements
 
-### Prerequisites
+- Integration with real-time threat intelligence databases.
+- Persistent storage for previous analyses.
+- Automated tests for detection rules.
+- Improved detection accuracy and reduced false positives.
+- Additional URL and message analysis capabilities.
 
-- Python 3.8 or newer
-- `pip`
+## 👩‍💻 Contributors
 
-### Installation
+- **Yukta** — [@Yukta-devlane-18](https://github.com/Yukta-devlane-18)
 
-```bash
-# 1. Clone the repository
-git clone https://github.com/Mythili-hub-19/Linklens.git
-cd Linklens
+## ⚠️ Disclaimer
 
-# 2. (Recommended) create and activate a virtual environment
-python -m venv venv
-source venv/bin/activate        # On Windows: venv\Scripts\activate
+LinkLens is an educational hackathon prototype that uses rule-based detection.
 
-# 3. Install dependencies
-pip install -r requirements.txt
-```
+It does not currently verify URLs against live threat intelligence databases. False positives and false negatives are possible, and a low risk score does not guarantee that a URL or message is safe.
 
-### Run the app
+Always verify suspicious links through official websites or trusted communication channels. Never share passwords, banking details, or OTPs with unverified sources.
 
-Start the server from inside the `backend` folder (`main.py` imports `detection.py` directly, so it must be run from there):
+## 📄 License
 
-```bash
-cd backend
-uvicorn main:app --reload
-```
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-Then open **http://127.0.0.1:8000** in your browser.
+---
 
-## Usage
+**Built for safer browsing and phishing awareness. 🔐**
 
-1. Paste a suspicious URL or message into the text box, or click one of the sample buttons.
-2. Click **Analyze Threat →**.
-3. Review the risk level, score, and the warnings that explain it.
-4. Click **Reset** to start over.
-
-## API
-
-### `GET /analyze`
-
-| Parameter | Type   | Description                      |
-| --------- | ------ | -------------------------------- |
-| `text`    | string | The URL or message to analyze    |
-
-**Example request**
-
-```
-GET /analyze?text=http://paypal.secure-login.xyz/verify
-```
-
-**Example response**
-
-```json
-{
-  "risk_score": 79,
-  "risk_level": "Dangerous",
-  "warnings": [
-    "Not secure: uses http instead of https (+15)",
-    "Risky website ending .xyz (+15)",
-    "Risky words in link: login, verify, secure (+24)",
-    "Pretends to be 'paypal' but is not (+25)"
-  ],
-  "prevention_tips": [
-    "Avoid opening this suspicious link.",
-    "Never enter passwords or OTPs on unverified pages.",
-    "Verify the sender through an official channel."
-  ]
-}
-```
-
-If `text` is empty, the API responds with HTTP `400` and `{"detail": "Input cannot be empty."}`.
-
-Because FastAPI is used, interactive API docs are also available at **http://127.0.0.1:8000/docs** while the server is running.
-
-## How detection works
-
-`detection.py` adds points for each warning sign it finds. More points mean more danger. The total is capped at 100.
-
-### Message wording
-
-| Check                                   | Points |
-| --------------------------------------- | ------ |
-| Urgent or threatening language          | +15    |
-| Request for sensitive information       | +25    |
-
-### Link checks (applied to every link found)
-
-| Check                                              | Points   |
-| -------------------------------------------------- | -------- |
-| IP address instead of a website name               | +30      |
-| `@` symbol that can hide the real website          | +25     |
-| `http://` instead of `https://`                    | +15      |
-| Very long link (over 75 characters)                | +10      |
-| Many hyphens in the website name (2 or more)       | +10      |
-| Risky ending such as `.xyz`, `.top`, `.tk`         | +15      |
-| URL shortener (`bit.ly`, `tinyurl.com`, …)         | +15      |
-| Risky words in the link (`login`, `verify`, …)     | +8 each, max +24 |
-| Well-known brand name on a site that isn't that brand | +25   |
-
-### Risk levels
-
-| Score    | Level      |
-| -------- | ---------- |
-| 0–19     | Safe       |
-| 20–49    | Suspicious |
-| 50–100   | Dangerous  |
-
-All keyword and domain lists (`URGENT_WORDS`, `SECRET_WORDS`, `BAD_ENDINGS`, `SHORTENERS`, `BRANDS`, `LINK_WORDS`) sit at the top of `detection.py`, so you can edit them freely to tune the detection.
-
-## Roadmap
-
-- Database support to store past analyses
-- Optional lookups against real threat-intelligence sources
-- Tests for the detection rules
-
-## Contributing
-
-Contributions are welcome. Fork the repo, create a branch for your change, and open a pull request with a short description of what you changed and why.
-
-## Disclaimer
-
-LinkLens is a hackathon prototype provided for demonstration and educational purposes. It uses simple heuristics, can produce false positives and false negatives, and must not be relied on as a security product. Always verify suspicious links and messages through official channels.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute it, provided the copyright and license notice are kept. The software is provided "as is", without warranty of any kind.
+### 🔗 [Try LinkLens Live](https://linklens-36fb.onrender.com)
